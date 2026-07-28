@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Rockefeller Mentor Profile — Interactive Deep Dive</title>
+<meta name="description" content="An interactive mentor profile of John D. Rockefeller: his psychology, mindset, business method, daily discipline, and legacy — distilled into actionable insights.">
+<meta name="color-scheme" content="light">
+<style>
+:root {
+  --paper: #F4F0E8;
+  --paper-deep: #EAE4D9;
+  --card: #FFFDF8;
+  --ink: #242422;
+  --muted: #686762;
+  --line: #D6D0C6;
+  --plum: #9F3F70;
+  --plum-soft: #F2DCE8;
+  --blue: #3F6F9F;
+  --blue-soft: #DDE9F3;
+  --green: #287A59;
+  --green-soft: #DDEDE5;
+  --terracotta: #C66638;
+  --terracotta-soft: #F5E2D8;
+  --violet: #9367B5;
+  --violet-soft: #EAE0F2;
+  --mustard: #A98B28;
+  --mustard-soft: #F1E9C9;
+  --font-head: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 16px;
+  --shadow: 0 1px 2px rgba(36,36,34,.05), 0 8px 24px rgba(36,36,34,.06);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 120px; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(15px, 0.6vw + 13.5px, 17px);
+  line-height: 1.62;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: linear-gradient(rgba(36,36,34,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(36,36,34,.045) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.wrap { max-width: 1100px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+.sitehead { padding-top: clamp(28px, 5vw, 56px); }
+.kicker { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--plum); margin: 0 0 10px; }
+h1 { font-family: var(--font-head); font-weight: 800; font-size: clamp(26px, 3.4vw, 44px); line-height: 1.14; letter-spacing: -0.015em; margin: 0 0 10px; max-width: 26ch; }
+.subtitle { font-size: clamp(16px, 1.6vw, 21px); color: var(--ink); margin: 0 0 12px; font-weight: 600; }
+.meta { font-family: var(--font-mono); font-size: 12.5px; line-height: 1.7; color: var(--muted); margin: 0 0 6px; }
+.headnote { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin: 0 0 18px; }
+.meta a, .headnote a { color: var(--blue); }
+#topnav { position: sticky; top: 0; z-index: 60; background: rgba(244, 240, 232, .96); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); backdrop-filter: blur(2px); }
+.navrow { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; padding-top: 8px; padding-bottom: 8px; }
+.navrow a { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink); text-decoration: none; padding: 6px 10px; border-radius: 999px; border: 1px solid transparent; white-space: nowrap; }
+.navrow a:hover { background: var(--paper-deep); border-color: var(--line); }
+.speedctl { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+.speedctl select { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 5px 8px; }
+main { display: block; }
+main > section { margin: clamp(22px, 4vw, 44px) auto; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(18px, 3vw, 34px); }
+h2 { font-family: var(--font-head); font-weight: 800; font-size: clamp(20px, 2.2vw, 28px); line-height: 1.22; letter-spacing: -0.01em; margin: 0 0 12px; }
+h3 { margin: 0 0 8px; font-size: 16px; }
+.lede { max-width: 75ch; margin: 0 0 14px; }
+.small { font-size: 13.5px; color: var(--muted); }
+.cards3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.minicard { border: 1px solid var(--line); border-radius: 14px; background: var(--paper); padding: 16px 18px; }
+.minicard h3 { font-size: 17px; margin: 4px 0 8px; }
+.minicard p { margin: 0; font-size: 14.5px; }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; margin: 0; border: 1px solid transparent; }
+.tag-plum { background: var(--plum-soft); color: var(--ink); border-color: var(--plum); }
+.tag-blue { background: var(--blue-soft); color: var(--ink); border-color: var(--blue); }
+.tag-green { background: var(--green-soft); color: var(--ink); border-color: var(--green); }
+.quoteband, .quotepanel { border: 1px solid var(--line); border-left: 4px solid var(--plum); background: var(--paper); border-radius: 12px; padding: 14px 18px; margin: 14px 0 18px; }
+.quotepanel h3 { font-size: 14.5px; margin: 0 0 6px; }
+.quote-text { font-size: 16px; font-style: italic; margin: 6px 0; color: var(--ink); }
+.quote-attr { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); margin: 8px 0 0; }
+.quoteband.flash, .quotepanel.flash { outline: 3px solid var(--plum); outline-offset: 2px; transition: outline-color .3s; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 10px; }
+.controls button { font-family: var(--font-mono); font-size: 13px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 9px; padding: 7px 14px; cursor: pointer; min-height: 36px; }
+.controls button:hover:not(:disabled) { background: var(--paper-deep); }
+.controls button:disabled { opacity: .45; cursor: default; }
+.controls button[data-act="play"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
+.controls button[data-act="play"]:hover:not(:disabled) { background: #3a3a37; }
+.caption { font-family: var(--font-mono); font-size: 12.8px; line-height: 1.55; color: var(--ink); background: var(--paper-deep); border-left: 3px solid var(--plum); border-radius: 8px; padding: 9px 12px; margin: 0 0 14px; min-height: 2.6em; }
+.scrollhint { display: none; font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+.svgwrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: 12px; background: var(--card); scrollbar-color: var(--muted) var(--paper-deep); scrollbar-width: thin; }
+svg.diagram { display: block; width: 100%; height: auto; }
+svg.diagram text { font-family: var(--font-body); fill: var(--ink); }
+svg.diagram .mono { font-family: var(--font-mono); }
+svg.diagram .bold { font-weight: 700; }
+svg.diagram .smallt { font-size: 11px; }
+svg.diagram .mutedt { fill: var(--muted); }
+.off { opacity: 0; }
+.off.on { opacity: 1; }
+.off, .off.on { transition: opacity .45s ease; }
+.disclosure { font-size: 13px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 10px; margin: 12px 0 0; }
+.legendline { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin: 12px 0 0; }
+.consequence { margin: 14px 0 0; padding: 12px 16px; border: 1px solid var(--terracotta); border-left-width: 4px; border-radius: 12px; background: var(--terracotta-soft); font-size: 14.5px; }
+.js .revealable { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+.js .revealable.revealed { opacity: 1; transform: none; }
+.statgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+.statcard { border: 1px solid var(--line); border-radius: 14px; background: var(--paper); padding: 14px 16px; }
+.statval { font-family: var(--font-head); font-weight: 800; font-size: clamp(22px, 2.4vw, 30px); margin: 0 0 6px; color: var(--plum); }
+.statdesc { margin: 0; font-size: 13px; color: var(--ink); line-height: 1.5; }
+.tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 16px; border: 1px solid var(--line); border-radius: 12px; }
+table.bench { border-collapse: collapse; width: 100%; min-width: 460px; font-size: 13.5px; background: var(--card); }
+table.bench caption { text-align: left; font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding: 10px 12px; }
+table.bench th, table.bench td { padding: 6px 12px; border-top: 1px solid var(--line); text-align: left; white-space: nowrap; }
+table.bench thead th { border-top: none; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--paper); }
+.bench td.num { text-align: center; font-weight: 700; color: var(--plum); }
+.resultnote { margin-top: 16px; padding: 14px 18px; border: 1px solid var(--line); border-left: 4px solid var(--green); border-radius: 12px; background: var(--green-soft); }
+.resultnote p { margin: 0 0 8px; font-size: 14.5px; }
+.resultnote p:last-child { margin-bottom: 0; }
+.letterblock { margin-top: 16px; padding: 22px 26px; border: 1px solid var(--line); border-left: 4px solid var(--blue); border-radius: 12px; background: var(--blue-soft); font-size: 15px; line-height: 1.7; }
+.letterblock p { margin: 0 0 10px; }
+.letterblock p:last-child { margin-bottom: 0; }
+.letterblock .signoff { font-family: var(--font-mono); font-size: 13px; color: var(--muted); margin-top: 14px; }
+footer { margin-top: clamp(30px, 5vw, 60px); border-top: 1px solid var(--line); background: var(--paper-deep); padding: 26px 0 90px; }
+footer p { font-size: 13.5px; color: var(--muted); max-width: 80ch; margin: 0 0 8px; }
+footer a { color: var(--blue); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
+a { color: var(--blue); }
+a:hover { color: var(--plum); }
+@media (prefers-reduced-motion: reduce) {
+  .off, .off.on { transition: none; }
+  .js .revealable, .js .revealable.revealed { transition: none; transform: none; }
+}
+@media (max-width: 900px) {
+  .cards3 { grid-template-columns: 1fr; }
+  .statgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .scrollhint { display: block; }
+  svg.diagram { min-width: 760px; }
+  .speedctl { margin-left: 0; width: 100%; justify-content: flex-end; }
+}
+</style>
+</head>
+<body>
+<header class="sitehead">
+  <div class="wrap">
+    <p class="kicker">Interactive mentor profile</p>
+    <h1>John D. Rockefeller: The Titan's Playbook</h1>
+    <p class="subtitle">A deep mentor profile — life, success, personality, and timeless principles</p>
+    <p class="meta">Sources: Ron Chernow's <em>Titan</em> · PMC Leadership Study · Investment Masters Class · Gildas Garrec Psychological Portrait · Interactive single-page demo</p>
+    <p class="headnote">Scroll through six chapters. Each section includes an interactive diagram — use Play, Step, or keyboard (Space, →, R).</p>
+  </div>
+</header>
+<nav id="topnav" aria-label="Section navigation">
+  <div class="wrap navrow">
+    <a href="#sec0">Overview</a>
+    <a href="#sec1">1 · Psychology</a>
+    <a href="#sec2">2 · Mindset</a>
+    <a href="#sec3">3 · Method</a>
+    <a href="#sec4">4 · Discipline</a>
+    <a href="#sec5">5 · Legacy</a>
+    <label class="speedctl" for="speedsel">Speed
+      <select id="speedsel" aria-label="Global animation speed">
+        <option value="0.5">0.5×</option>
+        <option value="1" selected>1×</option>
+        <option value="2">2×</option>
+        <option value="4">4×</option>
+      </select>
+    </label>
+  </div>
+</nav>
+
+<main class="wrap">
+  <noscript>
+    <p class="caption" style="margin-top:18px">JavaScript is disabled, so the Play/Step controls are inert. Every diagram below is shown in its complete final state.</p>
+  </noscript>
+
+  <!-- Section 0 -->
+  <section id="sec0" aria-labelledby="sec0-h">
+    <div class="panel">
+      <h2 id="sec0-h">One-Minute Overview</h2>
+      <p class="lede"><strong>Core insight — the duality of the titan:</strong> Rockefeller was not born to privilege. He was the son of a swindler and a saint. He weaponized his wounds, turned contradiction into armor, and built the largest fortune in history through a system of ruthless efficiency, emotional regulation, and strategic patience. His playbook contains 18 timeless insights.</p>
+      <div class="cards3">
+        <article class="minicard">
+          <p class="tag tag-plum">The Wound</p>
+          <h3>Psychological Armor</h3>
+          <p>His father was a con man; his mother was devout. From this duality he forged three schemas: a craving for control, deep vigilance, and an obsession with legitimacy. He never overcame his childhood — he weaponized it.</p>
+        </article>
+        <article class="minicard">
+          <p class="tag tag-blue">The Mind</p>
+          <h3>Unshakable Mindset</h3>
+          <p>At age 11 he decided to become the richest man alive. He viewed work as worship, failure as data, and confidence as a cognitive discipline. "The level of confidence determines the level of achievement."</p>
+        </article>
+        <article class="minicard">
+          <p class="tag tag-green">The Method</p>
+          <h3>Systematic Domination</h3>
+          <p>He controlled choke points, worshipped efficiency, let data replace emotion, and converted enemies into allies. He kept prices low not out of generosity but as a competitive moat.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1 -->
+  <section id="sec1" data-player aria-labelledby="sec1-h">
+    <div class="panel">
+      <h2 id="sec1-h">The Psychology: The Duality That Forged a Titan</h2>
+      <p class="lede">Rockefeller's upbringing seemed far from one scripted to produce the world's richest man. He was the oldest son of a peddler who struggled to make ends meet. His father, "Devil Bill," was a traveling con man, snake-oil salesman, bigamist, and charlatan. His mother, Eliza Davison, was a devout, strict, hardworking Baptist. From this duality emerged the psychological armor that would define an empire.</p>
+      <div class="quoteband" id="s1-quote">
+        <p class="quote-text">"His good side was every bit as good as his bad side was bad."</p>
+        <p class="quote-attr">— Ron Chernow, <em>Titan</em></p>
+      </div>
+      <div class="controls" data-section="sec1" aria-label="Section 1 animation controls">
+        <button type="button" data-act="play" aria-label="Play section 1 animation">▶ Play</button>
+        <button type="button" data-act="pause" aria-label="Pause section 1 animation" disabled>⏸ Pause</button>
+        <button type="button" data-act="step" aria-label="Advance section 1 by one step">⏭ Step</button>
+        <button type="button" data-act="reset" aria-label="Reset section 1 animation">↺ Reset</button>
+      </div>
+      <p class="caption" id="cap-sec1" aria-live="polite">Select Play for automatic playback or Step to advance one beat at a time. Space = play/pause, Right Arrow = step, R = reset.</p>
+      <p class="scrollhint">Scroll horizontally to inspect the diagram.</p>
+      <div class="svgwrap">
+        <svg class="diagram" id="svg-sec1" viewBox="0 0 1040 520" role="img" aria-labelledby="svg-sec1-t svg-sec1-d" data-prerender="final">
+          <title id="svg-sec1-t">Rockefeller's childhood duality and psychological armor</title>
+          <desc id="svg-sec1-d">Two parental influences — Devil Bill (terracotta) and Eliza (green) — converge on young John D., forging three psychological schemas that become his armor: control, vigilance, and perfection.</desc>
+<defs><marker id="svg-sec1-ah-terracotta" markerWidth="10" markerHeight="8" refX="7.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,3 L0,6 Z" fill="#C66638"/></marker><marker id="svg-sec1-ah-green" markerWidth="10" markerHeight="8" refX="7.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,3 L0,6 Z" fill="#287A59"/></marker><marker id="svg-sec1-ah-plum" markerWidth="10" markerHeight="8" refX="7.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,3 L0,6 Z" fill="#9F3F70"/></marker></defs>
+<g class="off on" id="s1-title"><text font-size="14" class="bold" x="40" y="36">Parental Duality → Psychological Armor</text></g>
+<g class="off on" id="s1-father"><rect x="40" y="56" width="220" height="80" rx="12" fill="#F5E2D8" stroke="#C66638" stroke-width="2"/><text font-size="15" class="bold" x="60" y="82">William "Devil Bill"</text><text font-size="12" class="mutedt" x="60" y="102">Con man · Bigamist · Snake-oil salesman</text><text font-size="12" class="mutedt" x="60" y="118">"I swindled my children to make them stronger"</text></g>
+<g class="off on" id="s1-mother"><rect x="320" y="56" width="220" height="80" rx="12" fill="#DDEDE5" stroke="#287A59" stroke-width="2"/><text font-size="15" class="bold" x="340" y="82">Eliza Davison</text><text font-size="12" class="mutedt" x="340" y="102">Devout Baptist · Strict · Hardworking</text><text font-size="12" class="mutedt" x="340" y="118">"Willful waste makes woeful want"</text></g>
+<g class="off on" id="s1-child"><rect x="200" y="180" width="180" height="50" rx="10" fill="#DDE9F3" stroke="#3F6F9F" stroke-width="2"/><text text-anchor="middle" font-size="14" class="bold" x="290" y="210">Young John D. (age 11)</text></g>
+<line class="off on" id="s1-fline" stroke="#C66638" stroke-width="2" marker-end="url(#svg-sec1-ah-terracotta)" x1="150" y1="136" x2="240" y2="180"/>
+<line class="off on" id="s1-mline" stroke="#287A59" stroke-width="2" marker-end="url(#svg-sec1-ah-green)" x1="430" y1="136" x2="340" y2="180"/>
+<g class="off on" id="s1-wounds"><text font-size="13" class="bold" x="40" y="280">Wounds inflicted:</text><rect x="40" y="296" width="280" height="36" rx="8" fill="#F5E2D8" stroke="#C66638" stroke-width="1.4"/><text font-size="12" x="54" y="318">Abandonment / Instability → Craving for CONTROL</text><rect x="40" y="340" width="280" height="36" rx="8" fill="#F5E2D8" stroke="#C66638" stroke-width="1.4"/><text font-size="12" x="54" y="362">Mistrust / Abuse → Deep VIGILANCE</text><rect x="40" y="384" width="280" height="36" rx="8" fill="#F5E2D8" stroke="#C66638" stroke-width="1.4"/><text font-size="12" x="54" y="406">Defectiveness / Shame → Obsession with PERFECTION</text></g>
+<g class="off on" id="s1-strengths"><text font-size="13" class="bold" x="560" y="280">Strengths instilled:</text><rect x="560" y="296" width="240" height="36" rx="8" fill="#DDEDE5" stroke="#287A59" stroke-width="1.4"/><text font-size="12" x="574" y="318">Frugality and financial discipline</text><rect x="560" y="340" width="240" height="36" rx="8" fill="#DDEDE5" stroke="#287A59" stroke-width="1.4"/><text font-size="12" x="574" y="362">Religious duty to work and give</text><rect x="560" y="384" width="240" height="36" rx="8" fill="#DDEDE5" stroke="#287A59" stroke-width="1.4"/><text font-size="12" x="574" y="406">Honesty as a competitive weapon</text></g>
+<g class="off on" id="s1-armor"><rect x="200" y="460" width="640" height="44" rx="10" fill="#EAE0F2" stroke="#9367B5" stroke-width="2"/><text text-anchor="middle" font-size="14" class="bold" x="520" y="487">THE ARMOR: Order · Vigilance · Perfection → The Titan</text></g>
+<line class="off on" id="s1-armorline" stroke="#9367B5" stroke-width="2" marker-end="url(#svg-sec1-ah-plum)" x1="290" y1="230" x2="520" y2="460"/>
+        </svg>
+      </div>
+      <p class="disclosure">Psychological framework adapted from Gildas Garrec's analysis and Chernow's <em>Titan</em>. Schemas are interpretive models, not clinical diagnoses.</p>
+      <p class="consequence revealable revealed" id="s1-consequence"><strong>Mentor Insight #1 — Turn Your Wounds Into Weapons:</strong> Rockefeller didn't overcome his childhood; he weaponized it. The instability made him crave order. The dishonesty around him made him obsess over honesty in ledgers. The shame made him pursue respectability with religious fervor. Your greatest disadvantages can become your competitive edge.</p>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="sec2" data-player aria-labelledby="sec2-h">
+    <div class="panel">
+      <h2 id="sec2-h">The Mindset: How Rockefeller Thought</h2>
+      <p class="lede">Rockefeller was not brilliant in the conventional sense. He described himself as "reliable but not brilliant." His superpower was not IQ — it was a system of thinking: think big, construct confidence, worship work, reframe failure, and never stagnate.</p>
+      <div class="quotepanel" id="s2-quote">
+        <h3>The 11-Year-Old Decision</h3>
+        <p class="quote-text">"I never seem to lack ambition. Since I was very young, to become the richest person has always been my impulsive ambition and dream... A great goal can enable you to exert all your strength."</p>
+        <p class="quote-attr">— John D. Rockefeller</p>
+      </div>
+      <div class="controls" data-section="sec2" aria-label="Section 2 animation controls">
+        <button type="button" data-act="play" aria-label="Play section 2 animation">▶ Play</button>
+        <button type="button" data-act="pause" aria-label="Pause section 2 animation" disabled>⏸ Pause</button>
+        <button type="button" data-act="step" aria-label="Advance section 2 by one step">⏭ Step</button>
+        <button type="button" data-act="reset" aria-label="Reset section 2 animation">↺ Reset</button>
+      </div>
+      <p class="caption" id="cap-sec2" aria-live="polite">Select Play for automatic playback or Step to advance one beat at a time. Space = play/pause, Right Arrow = step, R = reset.</p>
+      <p class="scrollhint">Scroll horizontally to inspect the diagram.</p>
+      <div class="svgwrap">
+        <svg class="diagram" id="svg-sec2" viewBox="0 0 1040 480" role="img" aria-labelledby="svg-sec2-t svg-sec2-d" data-prerender="final">
+          <title id="svg-sec2-t">The five pillars of Rockefeller's mindset</title>
+          <desc id="svg-sec2-d">Five colored cards arranged around a central Mindset hub, representing Think Big, Confidence, Work-Worship, Failure Reframe, and Anti-Stagnation.</desc>
+<defs><marker id="svg-sec2-ah-plum" markerWidth="10" markerHeight="8" refX="7.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,3 L0,6 Z" fill="#9F3F70"/></marker></defs>
+<g class="off on" id="s2-hub"><circle cx="520" cy="240" r="55" fill="#F2DCE8" stroke="#9F3F70" stroke-width="2.5"/><text text-anchor="middle" font-size="16" class="bold" x="520" y="236">MINDSET</text><text text-anchor="middle" font-size="11" class="mutedt" x="520" y="254">The Operating System</text></g>
+<g class="off on" id="s2-p1"><rect x="140" y="80" width="260" height="90" rx="12" fill="#F5E2D8" stroke="#C66638" stroke-width="1.8"/><text font-size="14" class="bold" x="160" y="108">① Think Big or Don't Think</text><text font-size="11.5" class="mutedt" x="160" y="128">"Do not make any small plans, because</text><text font-size="11.5" class="mutedt" x="160" y="144">it cannot inspire the soul." Small goals</text><text font-size="11.5" class="mutedt" x="160" y="160">produce small results. Great goals attract</text><text font-size="11.5" class="mutedt" x="160" y="176">energy, talent, and resources.</text></g>
+<line class="off on" id="s2-l1" stroke="#C66638" stroke-width="2" marker-end="url(#svg-sec2-ah-plum)" x1="400" y1="125" x2="475" y2="200"/>
+<g class="off on" id="s2-p2"><rect x="640" y="80" width="260" height="90" rx="12" fill="#DDE9F3" stroke="#3F6F9F" stroke-width="1.8"/><text font-size="14" class="bold" x="660" y="108">② Confidence is Discipline</text><text font-size="11.5" class="mutedt" x="660" y="128">"The level of confidence determines the</text><text font-size="11.5" class="mutedt" x="660" y="144">level of achievement." Replace "I might</text><text font-size="11.5" class="mutedt" x="660" y="160">lose" with "I will win." Confidence is not</text><text font-size="11.5" class="mutedt" x="660" y="176">a feeling — it is a cognitive practice.</text></g>
+<line class="off on" id="s2-l2" stroke="#3F6F9F" stroke-width="2" marker-end="url(#svg-sec2-ah-plum)" x1="640" y1="125" x2="565" y2="200"/>
+<g class="off on" id="s2-p3"><rect x="40" y="280" width="260" height="90" rx="12" fill="#DDEDE5" stroke="#287A59" stroke-width="1.8"/><text font-size="14" class="bold" x="60" y="308">③ Work as Worship</text><text font-size="11.5" class="mutedt" x="60" y="328">"If you view work as a pleasure, life is</text><text font-size="11.5" class="mutedt" x="60" y="344">heaven." He didn't love money — he loved</text><text font-size="11.5" class="mutedt" x="60" y="360">making money. The money was a scorecard.</text><text font-size="11.5" class="mutedt" x="60" y="376">The real addiction was the game.</text></g>
+<line class="off on" id="s2-l3" stroke="#287A59" stroke-width="2" marker-end="url(#svg-sec2-ah-plum)" x1="300" y1="280" x2="475" y2="280"/>
+<g class="off on" id="s2-p4"><rect x="740" y="280" width="260" height="90" rx="12" fill="#EAE0F2" stroke="#9367B5" stroke-width="1.8"/><text font-size="14" class="bold" x="760" y="308">④ Failure is a Stepping Stone</text><text font-size="11.5" class="mutedt" x="760" y="328">"Dream + Failure + Challenge = Success."</text><text font-size="11.5" class="mutedt" x="760" y="344">Never internalize failure as identity. See</text><text font-size="11.5" class="mutedt" x="760" y="360">it as data. "A failure does not show</text><text font-size="11.5" class="mutedt" x="760" y="376">anything — it will not label you incompetent."</text></g>
+<line class="off on" id="s2-l4" stroke="#9367B5" stroke-width="2" marker-end="url(#svg-sec2-ah-plum)" x1="740" y1="280" x2="565" y2="280"/>
+<g class="off on" id="s2-p5"><rect x="390" y="380" width="260" height="80" rx="12" fill="#F1E9C9" stroke="#A98B28" stroke-width="1.8"/><text text-anchor="middle" font-size="14" class="bold" x="520" y="408">⑤ Anti-Stagnation</text><text text-anchor="middle" font-size="11.5" class="mutedt" x="520" y="428">"Humans function like a bicycle — unless you</text><text text-anchor="middle" font-size="11.5" class="mutedt" x="520" y="444">move forward, you will stagger and fall."</text></g>
+<line class="off on" id="s2-l5" stroke="#A98B28" stroke-width="2" marker-end="url(#svg-sec2-ah-plum)" x1="520" y1="380" x2="520" y2="295"/>
+        </svg>
+      </div>
+      <p class="legendline">Five interconnected mindset principles. Each arrow represents a reinforcing loop back to the central operating system.</p>
+      <p class="disclosure">All quotes are attributed to Rockefeller from Chernow's <em>Titan</em> and contemporary biographical sources.</p>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="sec3" data-player aria-labelledby="sec3-h">
+    <div class="panel">
+      <h2 id="sec3-h">The Method: Business Strategy & Execution</h2>
+      <p class="lede">Rockefeller didn't dominate oil through luck or brutality. He dominated through systems: ruthless efficiency, choke-point control, data supremacy, vertical integration, price-as-weapon, and enemy-to-ally conversion. These six methods formed an insurmountable moat.</p>
+      <div class="quoteband" id="s3-quote">
+        <p class="quote-text">"I believe it is a duty for a man to get all the money he honestly can and give all he can."</p>
+        <p class="quote-attr">— John D. Rockefeller</p>
+      </div>
+      <div class="controls" data-section="sec3" aria-label="Section 3 animation controls">
+        <button type="button" data-act="play" aria-label="Play section 3 animation">▶ Play</button>
+        <button type="button" data-act="pause" aria-label="Pause section 3 animation" disabled>⏸ Pause</button>
+        <button type="button" data-act="step" aria-label="Advance section 3 by one step">⏭ Step</button>
+        <button type="button" data-act="reset" aria-label="Reset section 3 animation">↺ Reset</button>
+      </div>
+      <p class="caption" id="cap-sec3" aria-live="polite">Select Play for automatic playback or Step to advance one beat at a time. Space = play/pause, Right Arrow = step, R = reset.</p>
+      <p class="scrollhint">Scroll horizontally to inspect the diagram.</p>
+      <div class="svgwrap">
+        <svg class="diagram" id="svg-sec3" viewBox="0 0 1040 420" role="img" aria-labelledby="svg-sec3-t svg-sec3-d" data-prerender="final">
+          <title id="svg-sec3-t">The six methods of Rockefeller's business dominance</title>
+          <desc id="svg-sec3-d">Six interconnected strategy nodes forming a pipeline: Efficiency, Choke Point, Data, Integration, Low Price, and Allies — each feeding into the next to create an insurmountable competitive moat.</desc>
+<defs><marker id="svg-sec3-ah-muted" markerWidth="10" markerHeight="8" refX="7.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,3 L0,6 Z" fill="#686762"/></marker><marker id="svg-sec3-ah-plum" markerWidth="10" markerHeight="8" refX="7.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,3 L0,6 Z" fill="#9F3F70"/></marker></defs>
+<g class="off on" id="s3-m1"><rect x="20" y="60" width="150" height="90" rx="10" fill="#F5E2D8" stroke="#C66638" stroke-width="2"/><text text-anchor="middle" font-size="13" class="bold" x="95" y="88">① Efficiency</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="95" y="108">39 drops of solder</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="95" y="124">instead of 40</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="95" y="140">Cut unit costs in half</text></g>
+<line class="off on" id="s3-a1" stroke="#686762" stroke-width="2" marker-end="url(#svg-sec3-ah-muted)" x1="170" y1="105" x2="200" y2="105"/>
+<g class="off on" id="s3-m2"><rect x="200" y="60" width="150" height="90" rx="10" fill="#DDE9F3" stroke="#3F6F9F" stroke-width="2"/><text text-anchor="middle" font-size="13" class="bold" x="275" y="88">② Choke Point</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="275" y="108">Own the bottleneck</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="275" y="124">Control refining +</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="275" y="140">pipelines + railroads</text></g>
+<line class="off on" id="s3-a2" stroke="#686762" stroke-width="2" marker-end="url(#svg-sec3-ah-muted)" x1="350" y1="105" x2="380" y2="105"/>
+<g class="off on" id="s3-m3"><rect x="380" y="60" width="150" height="90" rx="10" fill="#DDEDE5" stroke="#287A59" stroke-width="2"/><text text-anchor="middle" font-size="13" class="bold" x="455" y="88">③ Data</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="455" y="108">"Oil Inspectors"</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="455" y="124">gather intelligence</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="455" y="140">Know more than owners</text></g>
+<line class="off on" id="s3-a3" stroke="#686762" stroke-width="2" marker-end="url(#svg-sec3-ah-muted)" x1="530" y1="105" x2="560" y2="105"/>
+<g class="off on" id="s3-m4"><rect x="560" y="60" width="150" height="90" rx="10" fill="#EAE0F2" stroke="#9367B5" stroke-width="2"/><text text-anchor="middle" font-size="13" class="bold" x="635" y="88">④ Integration</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="635" y="108">Own forests, kilns,</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="635" y="124">barrel factories</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="635" y="140">$2 saved per barrel</text></g>
+<line class="off on" id="s3-a4" stroke="#686762" stroke-width="2" marker-end="url(#svg-sec3-ah-muted)" x1="710" y1="105" x2="740" y2="105"/>
+<g class="off on" id="s3-m5"><rect x="740" y="60" width="150" height="90" rx="10" fill="#F1E9C9" stroke="#A98B28" stroke-width="2"/><text text-anchor="middle" font-size="13" class="bold" x="815" y="88">⑤ Low Price</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="815" y="108">Price as weapon</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="815" y="124">Grow the market</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="815" y="140">Deter competitors</text></g>
+<line class="off on" id="s3-a5" stroke="#686762" stroke-width="2" marker-end="url(#svg-sec3-ah-muted)" x1="890" y1="105" x2="920" y2="105"/>
+<g class="off on" id="s3-m6"><rect x="920" y="60" width="110" height="90" rx="10" fill="#F2DCE8" stroke="#9F3F70" stroke-width="2"/><text text-anchor="middle" font-size="13" class="bold" x="975" y="88">⑥ Allies</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="975" y="108">Convert enemies</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="975" y="124">into partners</text><text text-anchor="middle" font-size="10.5" class="mutedt" x="975" y="140">Align incentives</text></g>
+<g class="off on" id="s3-moat"><rect x="200" y="220" width="640" height="60" rx="12" fill="#FFFDF8" stroke="#9F3F70" stroke-width="2.5" stroke-dasharray="6 4"/><text text-anchor="middle" font-size="15" class="bold" x="520" y="248">THE MOAT</text><text text-anchor="middle" font-size="12" class="mutedt" x="520" y="268">Efficiency + Choke Point + Data + Integration + Low Price + Allies = Unassailable Dominance</text></g>
+<line class="off on" id="s3-moatline" stroke="#9F3F70" stroke-width="2" marker-end="url(#svg-sec3-ah-plum)" x1="520" y1="150" x2="520" y2="220"/>
+<g class="off on" id="s3-insight"><rect x="200" y="320" width="640" height="70" rx="10" fill="#F4F0E8" stroke="#D6D0C6" stroke-width="1.5"/><text text-anchor="middle" font-size="13" class="bold" x="520" y="348">Key Principle: "Make your enemies rich by making them your partners"</text><text text-anchor="middle" font-size="11.5" class="mutedt" x="520" y="370">He retained original management after acquisitions, offered stock, and created profit-sharing.</text><text text-anchor="middle" font-size="11.5" class="mutedt" x="520" y="386">During the Panic of 1873, he borrowed to keep all employees on payroll while competitors laid off.</text></g>
+        </svg>
+      </div>
+      <p class="legendline">Six methods form a reinforcing pipeline. Each method feeds the next, creating compounding competitive advantage.</p>
+      <p class="disclosure">Business strategies synthesized from Chernow's <em>Titan</em>, the Investment Masters Class analysis, and Standard Oil historical records.</p>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="sec4" data-player aria-labelledby="sec4-h">
+    <div class="panel">
+      <h2 id="sec4-h">The Discipline: Habits, Routines & Self-Mastery</h2>
+      <p class="lede">Despite building the world's largest fortune, Rockefeller maintained a strict hierarchy: God first, family second, career third. He was a teetotaler, taught Sunday school, and spent evenings playing with his children — balancing china on his nose and leading moonlit bike rides. His discipline was not deprivation; it was architecture.</p>
+      <div class="quotepanel" id="s4-quote">
+        <h3>The Balanced Life</h3>
+        <p class="quote-text">"Early I learned to work and to play. My life has been one long, happy holiday; Full of work and full of play. I dropped the worry on the way. God was good to me every day."</p>
+        <p class="quote-attr">— John D. Rockefeller</p>
+      </div>
+      <div class="controls" data-section="sec4" aria-label="Section 4 animation controls">
+        <button type="button" data-act="play" aria-label="Play section 4 animation">▶ Play</button>
+        <button type="button" data-act="pause" aria-label="Pause section 4 animation" disabled>⏸ Pause</button>
+        <button type="button" data-act="step" aria-label="Advance section 4 by one step">⏭ Step</button>
+        <button type="button" data-act="reset" aria-label="Reset section 4 animation">↺ Reset</button>
+      </div>
+      <p class="caption" id="cap-sec4" aria-live="polite">Select Play for automatic playback or Step to advance one beat at a time. Space = play/pause, Right Arrow = step, R = reset.</p>
+      <p class="scrollhint">Scroll horizontally to inspect the diagram.</p>
+      <div class="svgwrap">
+        <svg class="diagram" id="svg-sec4" viewBox="0 0 1040 560" role="img" aria-labelledby="svg-sec4-t svg-sec4-d" data-prerender="final">
+          <title id="svg-sec4-t">Rockefeller's discipline pyramid and daily habits</title>
+          <desc id="svg-sec4-d">A three-level priority pyramid (God, Family, Career) sits above six habit cards arranged in two rows, representing Ledger A, Save First, Emotional Control, Curate Environment, Balance, and Continuous Motion.</desc>
+<defs><marker id="svg-sec4-ah-plum" markerWidth="10" markerHeight="8" refX="7.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,3 L0,6 Z" fill="#9F3F70"/></marker></defs>
+<g class="off on" id="s4-title"><text font-size="14" class="bold" x="40" y="36">Priority Pyramid & Daily Habits</text></g>
+<g class="off on" id="s4-pyr1"><rect x="320" y="380" width="400" height="60" rx="10" fill="#DDEDE5" stroke="#287A59" stroke-width="2"/><text text-anchor="middle" font-size="15" class="bold" x="520" y="405">CAREER — Third</text><text text-anchor="middle" font-size="11" class="mutedt" x="520" y="425">"I would rather be my own tyrant than have someone else tyrannize me"</text></g>
+<g class="off on" id="s4-pyr2"><rect x="380" y="310" width="280" height="60" rx="10" fill="#DDE9F3" stroke="#3F6F9F" stroke-width="2"/><text text-anchor="middle" font-size="15" class="bold" x="520" y="335">FAMILY — Second</text><text text-anchor="middle" font-size="11" class="mutedt" x="520" y="355">Evenings playing with children, moonlit bike rides, teaching to skate</text></g>
+<g class="off on" id="s4-pyr3"><rect x="440" y="240" width="160" height="60" rx="10" fill="#F2DCE8" stroke="#9F3F70" stroke-width="2"/><text text-anchor="middle" font-size="15" class="bold" x="520" y="265">GOD — First</text><text text-anchor="middle" font-size="11" class="mutedt" x="520" y="285">Teetotaler, Sunday school teacher, church trustee</text></g>
+<line class="off on" id="s4-pyrl1" stroke="#287A59" stroke-width="2" marker-end="url(#svg-sec4-ah-plum)" x1="520" y1="380" x2="520" y2="370"/>
+<line class="off on" id="s4-pyrl2" stroke="#3F6F9F" stroke-width="2" marker-end="url(#svg-sec4-ah-plum)" x1="520" y1="310" x2="520" y2="300"/>
+<g class="off on" id="s4-h1"><rect x="40" y="60" width="300" height="70" rx="10" fill="#F5E2D8" stroke="#C66638" stroke-width="1.6"/><text font-size="13" class="bold" x="56" y="85">Ledger A — Track Everything</text><text font-size="11" class="mutedt" x="56" y="105">"What gets measured gets mastered." Every penny</text><text font-size="11" class="mutedt" x="56" y="121">earned and spent, from age 16 to $900M fortune.</text></g>
+<g class="off on" id="s4-h2"><rect x="370" y="60" width="300" height="70" rx="10" fill="#DDE9F3" stroke="#3F6F9F" stroke-width="1.6"/><text font-size="13" class="bold" x="386" y="85">Save Before You Spend</text><text font-size="11" class="mutedt" x="386" y="105">Pay yourself first — literally. The first allocation of</text><text font-size="11" class="mutedt" x="386" y="121">every dollar goes to your future self and your values.</text></g>
+<g class="off on" id="s4-h3"><rect x="700" y="60" width="320" height="70" rx="10" fill="#DDEDE5" stroke="#287A59" stroke-width="1.6"/><text font-size="13" class="bold" x="716" y="85">Emotional Regulation</text><text font-size="11" class="mutedt" x="716" y="105">Nobody remembered him losing his temper. In chaos,</text><text font-size="11" class="mutedt" x="716" y="121">the person who can slow down and see clearly wins.</text></g>
+<g class="off on" id="s4-h4"><rect x="40" y="150" width="300" height="70" rx="10" fill="#EAE0F2" stroke="#9367B5" stroke-width="1.6"/><text font-size="13" class="bold" x="56" y="175">Curate Your Environment</text><text font-size="11" class="mutedt" x="56" y="195">"Our minds act on the things that supply her." Decrease</text><text font-size="11" class="mutedt" x="56" y="211">time with negative people. Increase time with ambition.</text></g>
+<g class="off on" id="s4-h5"><rect x="370" y="150" width="300" height="70" rx="10" fill="#F1E9C9" stroke="#A98B28" stroke-width="1.6"/><text font-size="13" class="bold" x="386" y="175">Wealth Without Balance is Poverty</text><text font-size="11" class="mutedt" x="386" y="195">You can build an empire and still be present for family.</text><text font-size="11" class="mutedt" x="386" y="211">Burnout is not a badge of honor — it's a failure of systems.</text></g>
+<g class="off on" id="s4-h6"><rect x="700" y="150" width="320" height="70" rx="10" fill="#F2DCE8" stroke="#9F3F70" stroke-width="1.6"/><text font-size="13" class="bold" x="716" y="175">Continuous Motion</text><text font-size="11" class="mutedt" x="716" y="195">"Humans are like bicycles — stop pedaling and you fall."</text><text font-size="11" class="mutedt" x="716" y="211">Stagnation is death. Each summit is a new starting line.</text></g>
+        </svg>
+      </div>
+      <p class="legendline">Top: the three-level priority hierarchy. Bottom: six daily discipline habits that compound over a lifetime.</p>
+      <p class="disclosure">Habits and routines compiled from Chernow's <em>Titan</em>, contemporary accounts, and Rockefeller's personal letters.</p>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="sec5" data-player aria-labelledby="sec5-h">
+    <div class="panel">
+      <h2 id="sec5-h">The Legacy: Results & The Final Letter</h2>
+      <p class="lede">Rockefeller spent the first half of his life pursuing money and the second half giving it away. He donated $530 million in his lifetime. He founded the University of Chicago, Rockefeller University, Spelman College, and the Rockefeller Foundation. But his greatest gift was the system he built — one that outlived him in the form of Exxon, Chevron, Mobil, and Amoco.</p>
+      <div class="controls" data-section="sec5" aria-label="Section 5 animation controls">
+        <button type="button" data-act="play" aria-label="Play section 5 animation">▶ Play</button>
+        <button type="button" data-act="pause" aria-label="Pause section 5 animation" disabled>⏸ Pause</button>
+        <button type="button" data-act="step" aria-label="Advance section 5 by one step">⏭ Step</button>
+        <button type="button" data-act="reset" aria-label="Reset section 5 animation">↺ Reset</button>
+      </div>
+      <p class="caption" id="cap-sec5" aria-live="polite">Select Play for automatic playback or Step to advance one beat at a time. Space = play/pause, Right Arrow = step, R = reset.</p>
+      <p class="scrollhint">Scroll horizontally to inspect the diagram.</p>
+      <div class="svgwrap">
+        <svg class="diagram" id="svg-sec5" viewBox="0 0 1040 340" role="img" aria-labelledby="svg-sec5-t svg-sec5-d" data-prerender="final">
+          <title id="svg-sec5-t">Wealth accumulation and philanthropy over Rockefeller's life</title>
+          <desc id="svg-sec5-d">Two qualitative charts. Left: wealth accumulation rising exponentially from childhood to peak. Right: philanthropy accelerating in later life, with major institutions founded.</desc>
+<defs><marker id="svg-sec5-ah-muted" markerWidth="10" markerHeight="8" refX="7.6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,3 L0,6 Z" fill="#686762"/></marker></defs>
+<rect x="16" y="8" width="496" height="324" rx="14" fill="#F4F0E8" stroke="#D6D0C6" stroke-width="1.5"/>
+<text font-size="15" class="bold" x="36" y="36">Wealth accumulation (qualitative)</text>
+<rect x="528" y="8" width="496" height="324" rx="14" fill="#F4F0E8" stroke="#D6D0C6" stroke-width="1.5"/>
+<text font-size="15" class="bold" x="548" y="36">Philanthropy & giving (qualitative)</text>
+<g class="off on" id="s5-axesL"><line stroke="#686762" stroke-width="1.5" x1="72" y1="60" x2="72" y2="208"/><line stroke="#686762" stroke-width="1.5" x1="72" y1="208" x2="478" y2="208"/><text text-anchor="middle" font-size="10" class="mono mutedt" x="72" y="224">1850s</text><text text-anchor="middle" font-size="10" class="mono mutedt" x="478" y="224">1930s</text><text text-anchor="middle" font-size="11" class="mutedt" x="275" y="246">Life stage</text></g>
+<g class="off on" id="s5-axesR"><line stroke="#686762" stroke-width="1.5" x1="584" y1="60" x2="584" y2="208"/><line stroke="#686762" stroke-width="1.5" x1="584" y1="208" x2="990" y2="208"/><text text-anchor="middle" font-size="10" class="mono mutedt" x="584" y="224">1850s</text><text text-anchor="middle" font-size="10" class="mono mutedt" x="990" y="224">1930s</text><text text-anchor="middle" font-size="11" class="mutedt" x="787" y="246">Life stage</text></g>
+<path d="M 72.0 198.5 L 95.0 190.0 L 118.0 178.0 L 141.0 162.0 L 164.0 142.0 L 187.0 118.0 L 210.0 92.0 L 233.0 68.0 L 256.0 48.0 L 279.0 34.0 L 302.0 26.0 L 325.0 22.0 L 348.0 20.0 L 371.0 18.0 L 394.0 17.0 L 417.0 16.5 L 440.0 16.2 L 463.0 16.0 L 478.0 16.0" fill="none" stroke="#686762" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" class="off s5-base on"/>
+<path d="M 584.0 198.5 L 607.0 198.0 L 630.0 196.0 L 653.0 192.0 L 676.0 184.0 L 699.0 170.0 L 722.0 150.0 L 745.0 128.0 L 768.0 108.0 L 791.0 90.0 L 814.0 76.0 L 837.0 64.0 L 860.0 54.0 L 883.0 46.0 L 906.0 40.0 L 929.0 35.0 L 952.0 30.0 L 975.0 26.0 L 990.0 24.0" fill="none" stroke="#9F3F70" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" class="off s5-attn on"/>
+<line stroke="#686762" stroke-width="3" x1="36" y1="268" x2="62" y2="268"/>
+<text font-size="11" x="70" y="272">Wealth: exponential growth from bookkeeping clerk to $900M</text>
+<line stroke="#9F3F70" stroke-width="3" x1="36" y1="292" x2="62" y2="292"/>
+<text font-size="11" x="70" y="296">Philanthropy: $530M given; universities and medical breakthroughs</text>
+<line stroke="#686762" stroke-width="3" x1="548" y1="268" x2="574" y2="268"/>
+<text font-size="11" x="582" y="272">Early life: frugal saving and systematic accumulation</text>
+<line stroke="#9F3F70" stroke-width="3" x1="548" y1="292" x2="574" y2="292"/>
+<text font-size="11" x="582" y="296">Later life: "I believe it is a duty to get all you can and give all you can"</text>
+        </svg>
+      </div>
+      <p class="disclosure revealable revealed" id="s5-disclosure">Qualitative schematic based on historical wealth estimates and philanthropic records. Not precise financial data.</p>
+      <div class="statgrid revealable revealed" id="s5-stats">
+        <article class="statcard"><p class="statval">$900M</p><p class="statdesc">Peak net worth (~2.3% of US GDP at the time)</p></article>
+        <article class="statcard"><p class="statval">$530M</p><p class="statdesc">Total lifetime donations to education, medicine, and science</p></article>
+        <article class="statcard"><p class="statval">18</p><p class="statdesc">Timeless mentor insights distilled from his life and methods</p></article>
+        <article class="statcard"><p class="statval">97</p><p class="statdesc">Years of life, maintaining discipline and balance until the end</p></article>
+      </div>
+      <div class="tablewrap">
+        <table class="bench">
+          <caption>The 18 Mentor Insights — a complete summary</caption>
+          <thead>
+            <tr><th scope="col">#</th><th scope="col">Insight</th><th scope="col">Core Principle</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="num">1</td><td>Turn your wounds into weapons</td><td>Harness childhood adversity</td></tr>
+            <tr><td class="num">2</td><td>Think big or don't think at all</td><td>Ambitious goals create energy</td></tr>
+            <tr><td class="num">3</td><td>Confidence is a cognitive discipline</td><td>Practice thought replacement</td></tr>
+            <tr><td class="num">4</td><td>Fall in love with the process</td><td>Work as pleasure, not duty</td></tr>
+            <tr><td class="num">5</td><td>Failure is a stepping stone or tombstone</td><td>Interpretation determines outcome</td></tr>
+            <tr><td class="num">6</td><td>There is no finish line</td><td>Stagnation is death</td></tr>
+            <tr><td class="num">7</td><td>Worship at the altar of efficiency</td><td>Iterate relentlessly</td></tr>
+            <tr><td class="num">8</td><td>Control the bottleneck</td><td>Own the choke point</td></tr>
+            <tr><td class="num">9</td><td>Let data replace emotion</td><td>Empirical decision-making</td></tr>
+            <tr><td class="num">10</td><td>Turn costs into profits</td><td>Vertical integration</td></tr>
+            <tr><td class="num">11</td><td>Use price as a defensive weapon</td><td>Low margins deter competition</td></tr>
+            <tr><td class="num">12</td><td>Make enemies your partners</td><td>Align incentives through equity</td></tr>
+            <tr><td class="num">13</td><td>What gets measured gets mastered</td><td>Track everything</td></tr>
+            <tr><td class="num">14</td><td>Pay yourself first</td><td>Save before spending</td></tr>
+            <tr><td class="num">15</td><td>Stand still in a storm</td><td>Emotional regulation</td></tr>
+            <tr><td class="num">16</td><td>Wealth without balance is poverty</td><td>God / Family / Career hierarchy</td></tr>
+            <tr><td class="num">17</td><td>Guard your mind like a fortress</td><td>Curate your environment</td></tr>
+            <tr><td class="num">18</td><td>Build for legacy, not luxury</td><td>Create enduring value</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="letterblock revealable revealed" id="s5-letter">
+        <p><strong>Dear Friend,</strong></p>
+        <p>I was not brilliant. I was not born to privilege. I was the son of a swindler and a saint, and I chose which parts of each to keep.</p>
+        <p>At eleven, I decided I would be the richest man in the world. Not because I loved money — I loved the game. I loved the feeling of solving problems that others ran from. I loved the discipline of the ledger, the clarity of the data, the calm in the chaos.</p>
+        <p>I tracked every penny because I believed that what gets measured gets mastered. I saved before I spent because I would rather be my own tyrant than have someone else tyrannize me. I surrounded myself with ambitious people because I knew that minds act on what feeds them.</p>
+        <p>I failed many times. But I never let failure make me a coward. I viewed every setback as a stepping stone, not a tombstone. I kept prices low and quality high not because I was generous, but because I was strategic. I absorbed my competitors not because I was cruel, but because I offered them a better future inside my vision than they could build alone.</p>
+        <p>I put God first, family second, and career third — and somehow the career took care of itself. I never lost my temper because I knew that emotional regulation is the superpower of the elite. I walked slowly through storms because I understood that panic is the enemy of clarity.</p>
+        <p>But most importantly, I never stopped moving. Humans are like bicycles — stop pedaling and you fall. Stagnation is death. Each summit is just a new starting line.</p>
+        <p>You do not need superhuman intelligence. You do not need luck. You need belief, discipline, action, and the refusal to quit. Concentration and perseverance account for 95% of ability. The rest is details.</p>
+        <p>Dream big. Track everything. Save first. Stay calm. Convert enemies into allies. Love the work. Give it all away at the end.</p>
+        <p>Your destiny is determined by your actions, not your origins.</p>
+        <p class="signoff">— J.D.R.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Based on Ron Chernow's <em>Titan: The Life of John D. Rockefeller, Sr.</em>, the PMC leadership study on Rockefeller's characteristics, the Investment Masters Class analysis, and the psychological portrait by Gildas Garrec. This is an educational mentor profile, not a commercial product.</p>
+    <p>Interactive single-page demo · Keyboard: Space = play/pause, Right Arrow = step, R = reset.</p>
+  </div>
+</footer>
+
+<script>
+'use strict';
+document.documentElement.classList.add('js');
+
+var SPEED = 1;
+function D(ms) { return Math.max(1, Math.round(ms / SPEED)); }
+var BETWEEN_BEATS = 620;
+var HELP_CAPTION = 'Select Play for automatic playback or Step to advance one beat at a time. Space = play/pause, Right Arrow = step, R = reset.';
+var COMPLETE_CAPTION = 'Complete — the demonstration has ended. Select Reset to replay.';
+
+/* Store original SVG markup so we can rebuild from it */
+var ORIGINAL_SVG = {};
+document.querySelectorAll('svg.diagram').forEach(function(svg) {
+  ORIGINAL_SVG[svg.id] = svg.innerHTML;
+});
+
+/* ---------- Tracked timers ---------- */
+var PLAYERS = {};
+
+function secWait(sec, ms) {
+  return new Promise(function(resolve) {
+    var id = setTimeout(function() {
+      sec.timers.delete(id);
+      resolve();
+    }, D(ms));
+    sec.timers.add(id);
+  });
+}
+
+function setCaption(sec, str) { sec.captionEl.textContent = str; }
+function beatCaption(sec, k) {
+  return 'Step ' + (k + 1) + ' / ' + sec.steps.length + ' — ' + sec.steps[k].caption;
+}
+
+function updateControls(sec) {
+  var root = document.querySelector('.controls[data-section="' + sec.id + '"]');
+  if (!root) return;
+  var playBtn = root.querySelector('[data-act="play"]');
+  var pauseBtn = root.querySelector('[data-act="pause"]');
+  if (playBtn) playBtn.disabled = sec.playing;
+  if (pauseBtn) pauseBtn.disabled = !sec.playing;
+}
+
+function showIn(sec, sel) {
+  sec.svg.querySelectorAll(sel).forEach(function(el) { el.classList.add('on'); });
+}
+
+/* Rebuild SVG from original markup with all animated elements hidden */
+function buildFromOriginal(sec) {
+  sec.svg.innerHTML = ORIGINAL_SVG[sec.svg.id];
+  sec.svg.querySelectorAll('.off').forEach(function(el) { el.classList.remove('on'); });
+}
+
+/* Finalize: show everything */
+function finalizeAll(sec) {
+  sec.svg.querySelectorAll('.off').forEach(function(el) { el.classList.add('on'); });
+}
+
+async function playSection(sec) {
+  if (sec.playing || sec.busy) return;
+  if (sec.idx === 0 || sec.idx >= sec.steps.length) { collapseSection(sec); }
+  var g = sec.gen;
+  sec.playing = true;
+  updateControls(sec);
+  while (sec.playing && g === sec.gen && sec.idx < sec.steps.length) {
+    var beat = sec.steps[sec.idx];
+    setCaption(sec, beatCaption(sec, sec.idx));
+    sec.busy = true;
+    try { await beat.run(sec, g); } catch(err) { if(window.console) console.error(err); }
+    if (g !== sec.gen) return;
+    sec.idx += 1;
+    sec.busy = false;
+    if (sec.idx >= sec.steps.length) break;
+    if (sec.playing) {
+      await secWait(sec, BETWEEN_BEATS);
+      if (g !== sec.gen) return;
+    }
+  }
+  if (g !== sec.gen) return;
+  sec.busy = false;
+  if (sec.idx >= sec.steps.length) {
+    sec.playing = false;
+    setCaption(sec, COMPLETE_CAPTION + ' (' + sec.steps.length + ' / ' + sec.steps.length + ')');
+  }
+  updateControls(sec);
+}
+
+function pauseSection(sec) {
+  if (!sec.playing) return;
+  sec.playing = false;
+  updateControls(sec);
+  if (!sec.busy && sec.idx > 0 && sec.idx < sec.steps.length) {
+    setCaption(sec, 'Paused at step ' + sec.idx + ' / ' + sec.steps.length + ' — ' + sec.steps[sec.idx - 1].caption);
+  }
+}
+
+async function stepSection(sec) {
+  if (sec.busy) return;
+  if (sec.idx === 0 || sec.idx >= sec.steps.length) { collapseSection(sec); }
+  sec.playing = false;
+  var g = sec.gen;
+  var beat = sec.steps[sec.idx];
+  setCaption(sec, beatCaption(sec, sec.idx));
+  sec.busy = true;
+  updateControls(sec);
+  try { await beat.run(sec, g); } catch(err) { if(window.console) console.error(err); }
+  if (g !== sec.gen) return;
+  sec.idx += 1;
+  sec.busy = false;
+  if (sec.idx >= sec.steps.length) {
+    setCaption(sec, COMPLETE_CAPTION + ' (' + sec.steps.length + ' / ' + sec.steps.length + ')');
+  }
+  updateControls(sec);
+}
+
+function collapseSection(sec) {
+  sec.gen += 1;
+  sec.playing = false;
+  sec.busy = false;
+  sec.idx = 0;
+  sec.timers.forEach(function(id) { clearTimeout(id); });
+  sec.timers.clear();
+  sec.svg.removeAttribute('data-prerender');
+  buildFromOriginal(sec);
+  if (sec.cfg.onReset) sec.cfg.onReset(sec);
+}
+
+function resetSection(sec) {
+  collapseSection(sec);
+  finalizeAll(sec);
+  sec.svg.setAttribute('data-prerender', 'final');
+  setCaption(sec, HELP_CAPTION);
+  updateControls(sec);
+}
+
+function createPlayer(cfg) {
+  var sec = {
+    id: cfg.id, cfg: cfg, steps: cfg.beats, idx: 0,
+    playing: false, busy: false, gen: 0,
+    timers: new Set(),
+    svg: document.getElementById(cfg.svgId),
+    captionEl: document.getElementById(cfg.captionId),
+    rootEl: document.getElementById(cfg.id)
+  };
+  PLAYERS[cfg.id] = sec;
+  return sec;
+}
+
+function wireControls() {
+  document.querySelectorAll('.controls[data-section]').forEach(function(root) {
+    var id = root.getAttribute('data-section');
+    root.addEventListener('click', function(e) {
+      var btn = e.target.closest('button[data-act]');
+      if (!btn || btn.disabled) return;
+      var sec = PLAYERS[id];
+      if (!sec) return;
+      var act = btn.getAttribute('data-act');
+      if (act === 'play') playSection(sec);
+      else if (act === 'pause') pauseSection(sec);
+      else if (act === 'step') stepSection(sec);
+      else if (act === 'reset') resetSection(sec);
+    });
+  });
+}
+
+/* Keyboard shortcuts */
+var activeSectionId = 'sec1';
+function sectionOf(el) {
+  var s = el && el.closest ? el.closest('section[data-player]') : null;
+  return s ? s.id : null;
+}
+document.addEventListener('pointerdown', function(e) {
+  var id = sectionOf(e.target);
+  if (id) activeSectionId = id;
+});
+document.addEventListener('focusin', function(e) {
+  var id = sectionOf(e.target);
+  if (id) activeSectionId = id;
+});
+function nearestSectionId() {
+  var secs = document.querySelectorAll('section[data-player]');
+  var mid = window.innerHeight / 2;
+  var best = null, bd = Infinity;
+  secs.forEach(function(s) {
+    var r = s.getBoundingClientRect();
+    var c = (r.top + r.bottom) / 2;
+    var d = Math.abs(c - mid);
+    if (d < bd) { bd = d; best = s; }
+  });
+  return best ? best.id : activeSectionId;
+}
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  var t = e.target;
+  var tag = (t && t.tagName ? t.tagName : '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea' || tag === 'select' || (t && t.isContentEditable)) return;
+  var key = e.key;
+  var isSpace = key === ' ' || key === 'Spacebar';
+  var isRight = key === 'ArrowRight';
+  var isR = key === 'r' || key === 'R';
+  if (!isSpace && !isRight && !isR) return;
+  if (isSpace && (tag === 'button' || tag === 'a')) return;
+  var id = sectionOf(t) || (tag === 'body' ? nearestSectionId() : (activeSectionId || nearestSectionId()));
+  var sec = PLAYERS[id];
+  if (!sec) return;
+  activeSectionId = id;
+  if (isSpace) { e.preventDefault(); if (sec.playing) pauseSection(sec); else playSection(sec); }
+  else if (isRight) { e.preventDefault(); stepSection(sec); }
+  else if (isR) { e.preventDefault(); resetSection(sec); }
+});
+
+/* ---------- Section 1 beats: Psychology (8 beats) ---------- */
+var sec1Beats = [
+  { caption: 'Two parental pillars: Devil Bill (the con man) and Eliza (the devout saint).', run: async function(sec,g) { showIn(sec,'#s1-title'); await secWait(sec,300); showIn(sec,'#s1-father'); await secWait(sec,300); showIn(sec,'#s1-mother'); await secWait(sec,300); } },
+  { caption: 'From the father: abandonment, instability, and mistrust.', run: async function(sec,g) { showIn(sec,'#s1-fline'); await secWait(sec,400); } },
+  { caption: 'From the mother: frugality, discipline, and religious duty.', run: async function(sec,g) { showIn(sec,'#s1-mline'); await secWait(sec,400); } },
+  { caption: 'Young John D. absorbs both influences — the wounds and the strengths.', run: async function(sec,g) { showIn(sec,'#s1-child'); await secWait(sec,500); } },
+  { caption: 'The wounds forge three psychological schemas: control, vigilance, perfection.', run: async function(sec,g) { showIn(sec,'#s1-wounds'); await secWait(sec,500); } },
+  { caption: 'The strengths instill frugality, duty, and honesty as weapons.', run: async function(sec,g) { showIn(sec,'#s1-strengths'); await secWait(sec,500); } },
+  { caption: 'The schemas and strengths fuse into psychological armor.', run: async function(sec,g) { showIn(sec,'#s1-armorline'); await secWait(sec,400); showIn(sec,'#s1-armor'); await secWait(sec,400); } },
+  { caption: 'Mentor Insight #1: Turn your wounds into weapons. Your disadvantages can become edges.', run: async function(sec,g) { var c=document.getElementById('s1-consequence'); if(c)c.classList.add('revealed'); await secWait(sec,500); } }
+];
+
+/* ---------- Section 2 beats: Mindset (6 beats) ---------- */
+var sec2Beats = [
+  { caption: 'The central hub: Mindset as the operating system of achievement.', run: async function(sec,g) { showIn(sec,'#s2-hub'); await secWait(sec,500); } },
+  { caption: '① Think Big: "Do not make any small plans, because it cannot inspire the soul."', run: async function(sec,g) { showIn(sec,'#s2-p1'); showIn(sec,'#s2-l1'); await secWait(sec,500); } },
+  { caption: '② Confidence is a cognitive discipline — practice thought replacement daily.', run: async function(sec,g) { showIn(sec,'#s2-p2'); showIn(sec,'#s2-l2'); await secWait(sec,500); } },
+  { caption: '③ Work as Worship: fall in love with the process, not the prize.', run: async function(sec,g) { showIn(sec,'#s2-p3'); showIn(sec,'#s2-l3'); await secWait(sec,500); } },
+  { caption: '④ Failure is a stepping stone: "Dream + Failure + Challenge = Success."', run: async function(sec,g) { showIn(sec,'#s2-p4'); showIn(sec,'#s2-l4'); await secWait(sec,500); } },
+  { caption: '⑤ Anti-Stagnation: "Humans function like a bicycle — stop pedaling and you fall."', run: async function(sec,g) { showIn(sec,'#s2-p5'); showIn(sec,'#s2-l5'); await secWait(sec,500); } }
+];
+
+/* ---------- Section 3 beats: Method (7 beats) ---------- */
+var sec3Beats = [
+  { caption: '① Efficiency: 39 drops of solder instead of 40. Cut unit costs in half.', run: async function(sec,g) { showIn(sec,'#s3-m1'); await secWait(sec,400); } },
+  { caption: '② Choke Point: own the bottleneck — refining, pipelines, railroads.', run: async function(sec,g) { showIn(sec,'#s3-a1'); showIn(sec,'#s3-m2'); await secWait(sec,400); } },
+  { caption: '③ Data: "Oil Inspectors" gathered intelligence. He knew more than owners.', run: async function(sec,g) { showIn(sec,'#s3-a2'); showIn(sec,'#s3-m3'); await secWait(sec,400); } },
+  { caption: '④ Integration: own forests, kilns, barrel factories. Turn costs into profits.', run: async function(sec,g) { showIn(sec,'#s3-a3'); showIn(sec,'#s3-m4'); await secWait(sec,400); } },
+  { caption: '⑤ Low Price: price as a defensive weapon. Grow the market. Deter competitors.', run: async function(sec,g) { showIn(sec,'#s3-a4'); showIn(sec,'#s3-m5'); await secWait(sec,400); } },
+  { caption: '⑥ Allies: convert enemies into partners. Align incentives through equity.', run: async function(sec,g) { showIn(sec,'#s3-a5'); showIn(sec,'#s3-m6'); await secWait(sec,400); } },
+  { caption: 'The Moat: six methods combine into unassailable dominance.', run: async function(sec,g) { showIn(sec,'#s3-moatline'); showIn(sec,'#s3-moat'); await secWait(sec,400); showIn(sec,'#s3-insight'); await secWait(sec,500); } }
+];
+
+/* ---------- Section 4 beats: Discipline (7 beats) ---------- */
+var sec4Beats = [
+  { caption: 'The Priority Pyramid: three levels that governed every decision.', run: async function(sec,g) { showIn(sec,'#s4-title'); await secWait(sec,300); showIn(sec,'#s4-pyr1'); await secWait(sec,300); showIn(sec,'#s4-pyrl1'); showIn(sec,'#s4-pyr2'); await secWait(sec,300); showIn(sec,'#s4-pyrl2'); showIn(sec,'#s4-pyr3'); await secWait(sec,400); } },
+  { caption: 'Habit 1: Ledger A — track every penny. "What gets measured gets mastered."', run: async function(sec,g) { showIn(sec,'#s4-h1'); await secWait(sec,400); } },
+  { caption: 'Habit 2: Save Before You Spend. Pay yourself first — literally.', run: async function(sec,g) { showIn(sec,'#s4-h2'); await secWait(sec,400); } },
+  { caption: 'Habit 3: Emotional Regulation. Nobody remembered him losing his temper.', run: async function(sec,g) { showIn(sec,'#s4-h3'); await secWait(sec,400); } },
+  { caption: 'Habit 4: Curate Your Environment. Minds act on what feeds them.', run: async function(sec,g) { showIn(sec,'#s4-h4'); await secWait(sec,400); } },
+  { caption: 'Habit 5: Wealth Without Balance is Poverty. God first, family second.', run: async function(sec,g) { showIn(sec,'#s4-h5'); await secWait(sec,400); } },
+  { caption: 'Habit 6: Continuous Motion. "Humans are like bicycles — stop pedaling and you fall."', run: async function(sec,g) { showIn(sec,'#s4-h6'); await secWait(sec,500); } }
+];
+
+/* ---------- Section 5 beats: Legacy (5 beats) ---------- */
+var sec5Beats = [
+  { caption: 'Axes: two charts over Rockefeller's lifetime (1850s–1930s).', run: async function(sec,g) { showIn(sec,'#s5-axesL'); showIn(sec,'#s5-axesR'); var d=document.getElementById('s5-disclosure'); if(d)d.classList.add('revealed'); await secWait(sec,500); } },
+  { caption: 'Wealth accumulation: exponential growth from clerk to $900M peak.', run: async function(sec,g) { showIn(sec,'.s5-base'); await secWait(sec,600); } },
+  { caption: 'Philanthropy: $530M given — accelerating in later life as duty took over.', run: async function(sec,g) { showIn(sec,'.s5-attn'); await secWait(sec,600); } },
+  { caption: 'Headline numbers: $900M peak, $530M given, 18 insights, 97 years.', run: async function(sec,g) { var st=document.getElementById('s5-stats'); if(st)st.classList.add('revealed'); document.querySelectorAll('#s5-stats .statcard').forEach(function(c,i){ setTimeout(function(){c.classList.add('revealed');},150*(i+1)); }); await secWait(sec,800); } },
+  { caption: 'The Final Letter: his parting wisdom to anyone who would listen.', run: async function(sec,g) { var l=document.getElementById('s5-letter'); if(l)l.classList.add('revealed'); await secWait(sec,600); } }
+];
+
+/* ---------- Init ---------- */
+function initPlayers() {
+  createPlayer({ id:'sec1', svgId:'svg-sec1', captionId:'cap-sec1', beats:sec1Beats, onReset:function(sec){ var c=document.getElementById('s1-consequence'); if(c)c.classList.remove('revealed'); } });
+  createPlayer({ id:'sec2', svgId:'svg-sec2', captionId:'cap-sec2', beats:sec2Beats });
+  createPlayer({ id:'sec3', svgId:'svg-sec3', captionId:'cap-sec3', beats:sec3Beats });
+  createPlayer({ id:'sec4', svgId:'svg-sec4', captionId:'cap-sec4', beats:sec4Beats });
+  createPlayer({ id:'sec5', svgId:'svg-sec5', captionId:'cap-sec5', beats:sec5Beats, onReset:function(sec){ ['s5-disclosure','s5-stats','s5-letter'].forEach(function(id){ var el=document.getElementById(id); if(el)el.classList.remove('revealed'); }); document.querySelectorAll('#s5-stats .statcard').forEach(function(c){c.classList.remove('revealed');}); } });
+
+  Object.keys(PLAYERS).forEach(function(id){
+    var sec = PLAYERS[id];
+    if (sec.svg.getAttribute('data-prerender') !== 'final') {
+      buildFromOriginal(sec);
+      finalizeAll(sec);
+      sec.svg.setAttribute('data-prerender','final');
+    }
+    setCaption(sec, HELP_CAPTION);
+    updateControls(sec);
+  });
+}
+
+function layoutNav() {
+  var nav = document.getElementById('topnav');
+  if (!nav) return;
+  var h = nav.getBoundingClientRect().height;
+  document.querySelectorAll('main section[id]').forEach(function(s){
+    s.style.scrollMarginTop = (h + 16) + 'px';
+  });
+  document.documentElement.style.scrollPaddingTop = (h + 16) + 'px';
+}
+
+function setSpeed(mult) {
+  var v = parseFloat(mult);
+  if (!(v > 0)) v = 1;
+  SPEED = v;
+}
+
+function initPage() {
+  initPlayers();
+  wireControls();
+  layoutNav();
+  window.addEventListener('resize', layoutNav);
+  window.addEventListener('orientationchange', function(){ setTimeout(layoutNav, 60); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutNav);
+  var sel = document.getElementById('speedsel');
+  if (sel) sel.addEventListener('change', function(){ setSpeed(sel.value); });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPage);
+} else {
+  initPage();
+}
+window.addEventListener('load', layoutNav);
+</script>
+</body>
+</html>
